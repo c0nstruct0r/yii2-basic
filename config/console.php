@@ -1,8 +1,5 @@
 <?php
 
-$params = require __DIR__ . '/params.php';
-$db = require __DIR__ . '/db.php';
-
 $config = [
     'id' => 'basic-console',
     'basePath' => dirname(__DIR__),
@@ -13,21 +10,8 @@ $config = [
         '@npm'   => '@vendor/npm-asset',
         '@tests' => '@app/tests',
     ],
-    'components' => [
-        'cache' => [
-            'class' => 'yii\caching\FileCache',
-        ],
-        'log' => [
-            'targets' => [
-                [
-                    'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning'],
-                ],
-            ],
-        ],
-        'db' => $db,
-    ],
-    'params' => $params,
+    'components' => require __DIR__ . '/parts/components.php',
+    'params' => require __DIR__ . '/parts/params.php',
     /*
     'controllerMap' => [
         'fixture' => [ // Fixture generation command line.
