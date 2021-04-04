@@ -1,0 +1,36 @@
+version: '3.5'
+
+services:
+    php:
+        container_name: yii2-php
+        build:
+            context: docker/php
+        ports:
+            - '8101:80'
+        volumes:
+            - ~/.composer-docker/cache:/root/.composer/cache:delegated
+            - ./:/app:delegated
+            - ./docker/php/root:/root
+            - ./docker/php/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
+            - ./docker/php/hostname:/etc/hostname
+            - ./docker/php/runtime:/app/runtime
+        env_file:
+            - docker/.env
+    php-test:
+        container_name: yii2-php-test
+        build:
+            context: docker/php
+        ports:
+            - '8102:80'
+        volumes:
+            - ~/.composer-docker/cache:/root/.composer/cache:delegated
+            - ./:/app:delegated
+            - ./docker/php-test/root:/root
+            - ./docker/php-test/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
+            - ./docker/php-test/hostname:/etc/hostname
+            - ./docker/php-test/runtime:/app/runtime
+        env_file:
+            - docker/.env.test
+    mysql:
+        volumes:
+            - ./docker/mysql/root:/root

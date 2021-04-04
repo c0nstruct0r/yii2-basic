@@ -1,4 +1,7 @@
 Проект подготовлен для работы
+docker-compose up -d
+перейти на http://127.0.0.1
+
 
 <p align="center">
     <a href="https://github.com/yiisoft" target="_blank">
